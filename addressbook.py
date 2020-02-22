@@ -48,7 +48,7 @@ try:
     save.click()
 
     assertsave = browser.find_element_by_css_selector("div.alertinner")
-    assert "добавлен" in assertsave
+    assert "добавлен" in assertsave.text
     logout = browser.find_element_by_id("logout_link")
     logout.click()
 finally:
