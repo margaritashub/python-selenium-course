@@ -1,6 +1,7 @@
 from selenium import webdriver
 import time
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
 
 link = "http://selenium1py.pythonanywhere.com/ru/"
 
@@ -28,27 +29,27 @@ try:
     name = browser.find_element_by_name("first_name")
     name.send_keys("Rita")
     sname = browser.find_element_by_name("last_name")
-    sname.send_keys("Nerita")
+    sname.send_keys("Nerital")
     line1 = browser.find_element_by_id("id_line1")
-    line1.send_keys("ROSSIYA")
+    line1.send_keys("ROSSIYAmll3lll")
     line2 = browser.find_element_by_id("id_line2")
-    line2.send_keys("BOLWAYA")
+    line2.send_keys("BOLWAYAk")
     line4 = browser.find_element_by_name("line4")
     line4.send_keys("NIJNYAYA PAVLOVKA")
     state = browser.find_element_by_name("state")
-    state.send_keys("derevnya")
+    state.send_keys("derevnyd9awef")
     pstcode = browser.find_element_by_name("postcode")
-    pstcode.send_keys("44444444")
-    select2 = browser.find_element_by_name("country")
-
-    browser.execute_script("return arguments[0].scrollIntoView(true);", select2)
+    pstcode.send_keys("169500")
+    html = browser.find_element_by_tag_name('html')
+    html.send_keys(Keys.END)
+    select2 = Select(browser.find_element_by_name("country"))
     select2.select_by_visible_text("Russian Federation")
-
     save = browser.find_element_by_css_selector('.btn-lg')
     save.click()
 
-    assertsave = browser.find_element_by_css_selector("div.alertinner")
-    assert "добавлен" in assertsave.text
+    assertsave = browser.find_element_by_css_selector(".alertinner")
+    text = "добавлен"
+    assert text in assertsave.text
     logout = browser.find_element_by_id("logout_link")
     logout.click()
 finally:

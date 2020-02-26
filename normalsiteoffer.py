@@ -21,12 +21,23 @@ try:
     browser.find_element_by_link_text("Coders at Work").click()
     browser.find_element_by_css_selector(".btn-add-to-basket").click()
     assert browser.page_source.find("Codes at work был добавлен в вашу корзину.")
+
     browser.find_element_by_link_text("Посмотреть корзину").click()
     number = browser.find_element_by_name("form-0-quantity")
     number.clear()
     number.send_keys(3)
     browser.find_element_by_css_selector(".input-group-btn").click()
-    assert  browser.page_source.find("Ваша корзина удовлетворяет условиям предложения Normal site offer.")
+    assertsave = browser.find_element_by_css_selector("#messages")
+    text = "Ваша корзина удовлетворяет условиям предложения Normal site offer."
+    assert text in assertsave.text
+    browser.find_element_by_link_text("Посмотреть корзину").click()
+    number = browser.find_element_by_name("form-0-quantity")
+    number.clear()
+    number.send_keys(0)
+    browser.find_element_by_css_selector(".input-group-btn").click()
+    assertsave = browser.find_element_by_css_selector("#messages")
+    text = "Ваша корзина теперь пуста"
+    assert text in assertsave.text
     logout = browser.find_element_by_id("logout_link")
     logout.click()
 finally:

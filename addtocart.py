@@ -15,9 +15,9 @@ try:
     number.clear()
     number.send_keys(0)
     browser.find_element_by_css_selector(".input-group-btn").click()
-    browser.find_element_by_css_selector(".alertinner")
-    
-    assert  browser.page_source.find("Ваша корзина теперь пуста")
+    assertsave = browser.find_element_by_css_selector("#messages")
+    text = "Ваша корзина теперь пуста"
+    assert text in assertsave.text
 finally:
     # успеваем скопировать код за 30 секунд
     time.sleep(12)

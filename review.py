@@ -17,15 +17,22 @@ try:
     submit.click()
     message = browser.find_element_by_css_selector("div.alertinner")
     assert 'Рады видеть вас снова' in message.text
-    browser.find_element_by_link_text("Books").click()
-    browser.find_element_by_link_text("Hacking Exposed Wireless").click()
+    def findabook():
+         browser.find_element_by_link_text("Books").click()
+         browser.find_element_by_link_text("Hacking Exposed Wireless").click()
+    findabook()
     browser.find_element_by_id("write_review").click()
     browser.find_element_by_id("id_title").send_keys("OCHEN HOROWO")
-    browser.find_element_by_id("id_body").send_keys("tolko ne rabotaet")
-    browser.find_element_by_css_selector(".star-rating:nth-child(5)").click()
-
+    text = "tolko ne rabotaet"
+    browser.find_element_by_id("id_body").send_keys(text)
+    star = browser.find_element_by_css_selector(".star-rating:nth-child(5)")
+    star.click()
     browser.find_element_by_css_selector('#add_review_form button').click()
-    assert browser.page_source.find("Ваш отзыв добавлен.")
+    message = browser.find_element_by_css_selector("div.alertinner")
+    assert 'Ваш отзыв добавлен' in message.text
+    findabook()
+    reviews = browser.find_element_by_id("reviews")
+    assert text in reviews.text
     logout = browser.find_element_by_id("logout_link")
     logout.click()
 finally:
